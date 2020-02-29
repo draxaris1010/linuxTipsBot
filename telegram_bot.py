@@ -34,7 +34,7 @@ class TelegramBot:
         self.chat_id = message['chat']['id']
         self.incoming_message_text = message['text'].lower()
         self.first_name = message['from']['first_name']
-        self.last_name = message['from']['last_name']
+        # self.last_name = message['from']['last_name']
 
 
     def action(self):
@@ -48,13 +48,15 @@ class TelegramBot:
         success = None
 
         if self.incoming_message_text == '/hello':
-            self.outgoing_message_text = "Hello {} {}!".format(self.first_name, self.last_name)
+            self.outgoing_message_text = "Hello {}!".format(self.first_name, self.last_name)
             success = self.send_message()
-        
-        if self.incoming_message_text == '/rad':
-            self.outgoing_message_text = '🤙'
+		
+        if self.incoming_message_text == '/help':
+            self.outgoing_message_text = "Here are all the aviable commands:\n/help - Lists all avaible commands.\n/hello - Returns your name."
             success = self.send_message()
-        
+        if self.incoming_message_text == '/start':
+            self.outgoing_message_text = "Hello there!\nPlease note that this bot is still in development so don\'t expect to much from it."
+            success = self.send_message()
         return success
 
 
